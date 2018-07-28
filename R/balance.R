@@ -44,13 +44,13 @@ balance <- function(x, y,
     rownames(x) <- as.character(1:nrow(x))
   }
 
-  # Order Serial Binary Partition [order components (D)]
-  d.weight <- apply(y, 1, function(x) sum(x * 1/1:length(x)))
-  d.order <- order(d.weight, decreasing = TRUE)
-
   # Order Serial Binary Partition [order balance (D-1)]
-  b.weight <- apply(y, 2, function(x) sum(abs(x)))
+  b.weight <- apply(y, 2, function(i) sum(abs(i)))
   b.order <- order(b.weight, decreasing = TRUE)
+
+  # Order Serial Binary Partition [order components (D)]
+  d.weight <- apply(y[,b.order], 1, function(i) sum(i * 1/1:length(i)))
+  d.order <- order(d.weight, decreasing = TRUE)
 
   # Prepare balance.partition plot
   pt <- y
@@ -102,9 +102,9 @@ balance <- function(x, y,
   }
 
   balance.partition <-
-    ggplot2::ggplot(pt, ggplot2::aes(x = BalanceID, y = Component, shape = Part, group = Group)) +
-    ggplot2::geom_line(ggplot2::aes(linetype = Part)) +
-    ggplot2::geom_point(ggplot2::aes(col = d.group), size = size.pt) + # if missing, set to "1"
+    ggplot2::ggplot(pt, ggplot2::aes_string(x = "BalanceID", y = "Component", shape = "Part", group = "Group")) +
+    ggplot2::geom_line(ggplot2::aes_string(linetype = "Part")) +
+    ggplot2::geom_point(ggplot2::aes_string(col = "d.group"), size = size.pt) + # if missing, set to "1"
     ggplot2::scale_colour_manual(values = d.cols) + # if missing, set to "black"
     ggplot2::xlab("Balance ID") + ggplot2::ylab("Component ID") +
     ggplot2::labs(col = "Component Group", shape = "Partition", linetype = "Partition") +
@@ -114,10 +114,10 @@ balance <- function(x, y,
     ggplot2::theme(legend.position = "top")
 
   balance.distribution <-
-    ggplot2::ggplot(dt, ggplot2::aes(x = BalanceID, y = SampleValue, group = Group), col = "black") +
-    ggplot2::geom_boxplot(ggplot2::aes(col = n.group)) + # if missing, set to "1"
+    ggplot2::ggplot(dt, ggplot2::aes_string(x = "BalanceID", y = "SampleValue", group = "Group"), col = "black") +
+    ggplot2::geom_boxplot(ggplot2::aes_string(col = "n.group")) + # if missing, set to "1"
     ggplot2::geom_line() + # keep unchanged to show range...
-    ggplot2::geom_jitter(ggplot2::aes(col = n.group), size = size.pt) + # if missing, set to "1"
+    ggplot2::geom_jitter(ggplot2::aes_string(col = "n.group"), size = size.pt) + # if missing, set to "1"
     ggplot2::scale_colour_manual(values = n.cols) + # if missing, set to "black"
     ggplot2::xlab("") + ggplot2::ylab("Sample-wise Distribution of Balance") +
     ggplot2::ylim(-1.1 * max(abs(dt$SampleValue)), 1.1 * max(abs(dt$SampleValue))) +

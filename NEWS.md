@@ -1,3 +1,9 @@
+## balance 0.0.2
+---------------------
+* Update `balance` method
+    * Fix the automatic sorting of serial binary partition matrix
+    * Add test that sorting does not alter results
+
 ## balance 0.0.1
 ---------------------
 * Create package skeleton
