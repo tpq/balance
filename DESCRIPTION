@@ -1,11 +1,29 @@
 Package: balance
-Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
-Encoding: UTF-8
-LazyData: true
+Title: Visualize Balances of Compositional Data
+Version: 0.0.1
+URL: http://github.com/tpq/balance
+BugReports: http://github.com/tpq/balance/issues
+Authors@R: c(
+    person("Thomas", "Quinn", email = "contacttomquinn@gmail.com", role = c("aut", "cre"))
+    )
+Description: Balances have become a cornerstone of compositional data analysis. However,
+ conceptualizing balances is difficult, especially for high-dimensional data. Most often,
+ investigators visualize balances with "balance dendrograms". However, this visualization
+ tool does not scale well for large data. This package provides an alternative scheme for
+ visualizing balances.
+License: GPL-2
+LazyData: TRUE
+VignetteBuilder: knitr
+RoxygenNote: 6.0.1
+Imports:
+    ggplot2,
+    grid,
+    reshape2,
+    robCompositions
+Depends:
+    R (>= 3.2.2)
+Suggests:
+    ggthemes,
+    testthat,
+    knitr,
+    rmarkdown
