@@ -29,7 +29,7 @@ colnames(y1) <- paste0("z", 1:4)
 With the data loaded, we can calculate and visualize the balances.
 
 ``` r
-res <- balance(expenditures, y1, size.text = 9)
+res <- balance(expenditures, y1, size.text = 8)
 #> sROC 0.1-2 loaded
 ```
 
@@ -40,7 +40,7 @@ Optionally, users can color components (in left figure) or samples (in right fig
 Here, we color components by a user-defined grouping.
 
 ``` r
-res <- balance(expenditures, y1, d.group = c("A", "B", "A", "B", "C"), size.text = 9)
+res <- balance(expenditures, y1, d.group = c("A", "B", "A", "B", "C"), size.text = 8)
 ```
 
 ![](README-unnamed-chunk-5-1.png)
@@ -48,7 +48,7 @@ res <- balance(expenditures, y1, d.group = c("A", "B", "A", "B", "C"), size.text
 Here, we color samples by a user-defined grouping.
 
 ``` r
-res <- balance(expenditures, y1, n.group = c(rep("A", 10), rep("B", 10)), size.text = 9)
+res <- balance(expenditures, y1, n.group = c(rep("A", 10), rep("B", 10)), size.text = 8)
 ```
 
 ![](README-unnamed-chunk-6-1.png)
@@ -59,7 +59,7 @@ Here, we do both.
 res <- balance(expenditures, y1,
                d.group = c("A", "B", "A", "B", "C"),
                n.group = c(rep("A", 10), rep("B", 10)),
-               size.text = 9)
+               size.text = 8)
 ```
 
 ![](README-unnamed-chunk-7-1.png)
