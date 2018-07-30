@@ -35,7 +35,7 @@ res <- balance(expenditures, y1, size.text = 8)
 
 ![](README-unnamed-chunk-4-1.png)
 
-Optionally, users can color components (in left figure) or samples (in right figure) based on a user-defined grouping. To do this, users must provide a vector of group labels for each component via the `d.group`argument (or for each sample via the `n.group` argument). Due due to limitations imposed by the palette, there is a maximum of eight groupings allowed per vector.
+Optionally, users can color components (in left figure) or samples (in right figure) based on a user-defined grouping. To do this, users must provide a vector of group labels for each component via the `d.group`argument (or for each sample via the `n.group` argument). Though, due to limitations imposed by the palette, there is a maximum of eight groupings allowed per vector.
 
 Here, we color components by a user-defined grouping.
 
