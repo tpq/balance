@@ -44,6 +44,11 @@ balance <- function(x, y,
     rownames(x) <- as.character(1:nrow(x))
   }
 
+  # Anticipate irregular data
+  x <- as.data.frame(x)
+  y <- as.data.frame(y)
+  rownames(y) <- colnames(x)
+
   # Order Serial Binary Partition [order balance (D-1)]
   b.weight <- apply(y, 2, function(i) sum(abs(i)))
   b.order <- order(b.weight, decreasing = TRUE)

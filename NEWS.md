@@ -1,3 +1,8 @@
+## balance 0.0.3
+---------------------
+* Update `balance` method
+    * Coerce input as `data.frame` to prevent errors
+
 ## balance 0.0.2
 ---------------------
 * Update `balance` method
