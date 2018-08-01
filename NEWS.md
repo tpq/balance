@@ -1,3 +1,8 @@
+## balance 0.0.7
+---------------------
+* Update `balance` method
+    * Fix bug caused by using `n.group` in presence of unique rownames
+
 ## balance 0.0.6
 ---------------------
 * Update `balance` method

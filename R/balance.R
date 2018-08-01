@@ -83,6 +83,7 @@ balance <- function(x, y,
   # Prepare balance.distribution plot
   B <- balances(x, y)
   colnames(B) <- colnames(y)
+  rownames(B) <- rownames(x)
   dt <- wide2long(B)
   colnames(dt) <- c("SampleValue", "BalanceID", "Index")
   dt$BalanceID <- factor(dt$BalanceID, rev(colnames(y)[b.order]))
