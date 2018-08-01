@@ -31,10 +31,9 @@ A list of the "partition" \code{ggplot} object, the "distribution"
  \code{ggplot} object, and the per-sample balances.
 }
 \description{
-This function uses \code{robCompositions::balances} to calculate the
- balances based on the compositional data set and a serial binary partition
- matrix, then generates a figure based on the results. For more details,
- see \code{?robCompositions::balances}.
+This function calculates balances based on the compositional data
+ set and serial binary partition (SBP) matrix provided, then generates a
+ figure from the results.
 }
 \author{
 Thom Quinn

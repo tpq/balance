@@ -1,9 +1,8 @@
 #' Calculate and Visualize Balances
 #'
-#' This function uses \code{robCompositions::balances} to calculate the
-#'  balances based on the compositional data set and a serial binary partition
-#'  matrix, then generates a figure based on the results. For more details,
-#'  see \code{?robCompositions::balances}.
+#' This function calculates balances based on the compositional data
+#'  set and serial binary partition (SBP) matrix provided, then generates a
+#'  figure from the results.
 #'
 #' @param x A matrix with rows as samples (N) and columns as components (D).
 #' @param y A serial binary partition matrix with rows as components (D) and
@@ -33,6 +32,14 @@ balance <- function(x, y,
   cols <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
             "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3")
 
+  if(ncol(x) != nrow(y)){
+    stop("Please check that ncol(x) = nrow(y) = D.")
+  }
+
+  if(any(x == 0)){
+    stop("Please remove zeros before analysis.")
+  }
+
   # Force column names
   if(is.null(colnames(x))){
     colnames(x) <- paste0("Component", 1:ncol(x))
@@ -59,20 +66,19 @@ balance <- function(x, y,
 
   # Prepare balance.partition plot
   pt <- y
-  pt$Component <- colnames(x)
-  pt <- suppressMessages(reshape2::melt(pt))
+  pt <- wide2long(pt)
   pt <- pt[pt$value != 0,]
-  colnames(pt) <- c("Component", "BalanceID", "Part")
+  colnames(pt) <- c("Part", "BalanceID", "Component")
   pt$Component <- factor(pt$Component, colnames(x)[d.order])
   pt$BalanceID <- factor(pt$BalanceID, rev(colnames(y)[b.order]))
   pt$Part <- factor(pt$Part, levels = c(1, -1))
   pt$Group <- paste0(pt$BalanceID, pt$Part) # for geom_line()
 
   # Prepare balance.distribution plot
-  B <- robCompositions::balances(x, y)[[1]]
+  B <- balances(x, y)
   colnames(B) <- colnames(y)
-  dt <- suppressMessages(reshape2::melt(B))
-  colnames(dt) <- c("Index", "BalanceID", "SampleValue")
+  dt <- wide2long(B)
+  colnames(dt) <- c("SampleValue", "BalanceID", "Index")
   dt$BalanceID <- factor(dt$BalanceID, rev(colnames(y)[b.order]))
 
   if(!all(pt$BalanceID %in% dt$BalanceID)) stop("Unexpected Error: try renaming balances.")
