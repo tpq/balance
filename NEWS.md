@@ -1,3 +1,9 @@
+## balance 0.0.6
+---------------------
+* Update `balance` method
+    * Use `weigh.var` argument to weigh line width by explained variance
+    * Use `size.line` argument to alter line width factor
+
 ## balance 0.0.5
 ---------------------
 * Update `balance` method

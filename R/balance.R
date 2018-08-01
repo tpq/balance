@@ -13,7 +13,11 @@
 #'  If provided, used to color sample points.
 #' @param boxplot.split A boolean. Toggles whether to split the boxplot
 #'  by \code{n.group}. TRUE better resembles balance dendrogram style.
+#' @param weigh.var A boolean. Toggles whether to weigh line width
+#'  by the proportion of explained variance. Only do this if balances
+#'  come from an SBP that decomposes variance.
 #' @param size.text An integer. Sets legend text size.
+#' @param size.line An integer. Sets line width size.
 #' @param size.pt An integer. Sets point size.
 #'
 #' @return A list of the "partition" \code{ggplot} object, the "distribution"
@@ -26,7 +30,9 @@ balance <- function(x, y,
                     d.group,
                     n.group,
                     boxplot.split = FALSE,
+                    weigh.var = FALSE,
                     size.text = 20,
+                    size.line = 1,
                     size.pt = 4){
 
   cols <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
@@ -81,6 +87,17 @@ balance <- function(x, y,
   colnames(dt) <- c("SampleValue", "BalanceID", "Index")
   dt$BalanceID <- factor(dt$BalanceID, rev(colnames(y)[b.order]))
 
+  # Calculate line width from var
+  if(weigh.var){
+    vars <- apply(B, 2, stats::var)
+    vars <- vars/sum(vars)
+    linewidth <- data.frame("BalanceID" = colnames(B), "LineWidth" = size.line * vars)
+    dt <- merge(dt, linewidth)
+  }else{
+    linewidth <- data.frame("BalanceID" = colnames(B), "LineWidth" = size.line)
+    dt <- merge(dt, linewidth)
+  }
+
   if(!all(pt$BalanceID %in% dt$BalanceID)) stop("Unexpected Error: try renaming balances.")
   if(!all(dt$BalanceID %in% pt$BalanceID)) stop("Unexpected Error: try renaming balances.")
 
@@ -126,12 +143,12 @@ balance <- function(x, y,
   balance.distribution <-
     ggplot2::ggplot(dt, ggplot2::aes_string(x = "BalanceID", y = "SampleValue", group = "Group"), col = "black") +
     ggplot2::geom_boxplot(ggplot2::aes_string(col = "n.group")) + # if missing, set to "1"
-    ggplot2::geom_line() + # keep unchanged to show range...
+    ggplot2::geom_line(ggplot2::aes_string(size = "LineWidth")) + # keep unchanged to show range...
     ggplot2::geom_jitter(ggplot2::aes_string(col = "n.group"), size = size.pt) + # if missing, set to "1"
     ggplot2::scale_colour_manual(values = n.cols) + # if missing, set to "black"
     ggplot2::xlab("") + ggplot2::ylab("Sample-wise Distribution of Balance") +
     ggplot2::ylim(-1.1 * max(abs(dt$SampleValue)), 1.1 * max(abs(dt$SampleValue))) +
-    ggplot2::labs(col = "Sample Group") +
+    ggplot2::labs(col = "Sample Group") + ggplot2::guides(size = FALSE) +
     ggplot2::coord_flip() + ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = .5)) +
     ggplot2::theme(text = ggplot2::element_text(size = size.text)) +
