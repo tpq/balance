@@ -19,7 +19,7 @@ balance.compute <- function(x, contrast){
   apply(x, 1, function(sample){
     ipos <- sample[contrast == 1]
     ineg <- sample[contrast == -1]
-    geomean <- function(i) prod(i)^(1/length(i))
+    geomean <- function(i) exp(mean(log(i)))
     const * log(geomean(ipos) / geomean(ineg))
   })
 }

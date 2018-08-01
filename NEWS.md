@@ -1,3 +1,9 @@
+## balance 0.0.5
+---------------------
+* Update `balance` method
+    * Compute balances using `exp(mean(log(x)))` to prevent overflow
+    * Remove "linetype" aesthetic from partition figure
+
 ## balance 0.0.4
 ---------------------
 * Update `balance` method

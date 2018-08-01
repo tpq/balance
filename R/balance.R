@@ -114,11 +114,10 @@ balance <- function(x, y,
 
   balance.partition <-
     ggplot2::ggplot(pt, ggplot2::aes_string(x = "BalanceID", y = "Component", shape = "Part", group = "Group")) +
-    ggplot2::geom_line(ggplot2::aes_string(linetype = "Part")) +
-    ggplot2::geom_point(ggplot2::aes_string(col = "d.group"), size = size.pt) + # if missing, set to "1"
+    ggplot2::geom_line() + ggplot2::geom_point(ggplot2::aes_string(col = "d.group"), size = size.pt) + # if missing, set to "1"
     ggplot2::scale_colour_manual(values = d.cols) + # if missing, set to "black"
     ggplot2::xlab("Balance ID") + ggplot2::ylab("Component ID") +
-    ggplot2::labs(col = "Component Group", shape = "Partition", linetype = "Partition") +
+    ggplot2::labs(col = "Component Group", shape = "Partition") +
     ggplot2::coord_flip() + ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = .5)) +
     ggplot2::theme(text = ggplot2::element_text(size = size.text)) +
