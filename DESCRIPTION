@@ -1,6 +1,6 @@
 Package: balance
 Title: Visualize Balances of Compositional Data
-Version: 0.0.3
+Version: 0.0.4
 URL: http://github.com/tpq/balance
 BugReports: http://github.com/tpq/balance/issues
 Authors@R: c(
@@ -17,13 +17,13 @@ VignetteBuilder: knitr
 RoxygenNote: 6.0.1
 Imports:
     ggplot2,
-    grid,
-    reshape2,
-    robCompositions
+    grid
 Depends:
     R (>= 3.2.2)
 Suggests:
     ggthemes,
     knitr,
+    reshape2,
     rmarkdown,
+    robCompositions,
     testthat

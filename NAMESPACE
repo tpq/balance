@@ -2,3 +2,6 @@
 
 export(balance)
 export(balance.combine)
+export(balance.compute)
+export(balances)
+export(wide2long)

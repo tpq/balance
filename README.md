@@ -30,7 +30,6 @@ With the data loaded, we can calculate and visualize the balances.
 
 ``` r
 res <- balance(expenditures, y1, size.text = 8)
-#> sROC 0.1-2 loaded
 ```
 
 ![](README-unnamed-chunk-4-1.png)

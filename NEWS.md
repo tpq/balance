@@ -1,3 +1,9 @@
+## balance 0.0.4
+---------------------
+* Update `balance` method
+    * Re-write `robCompositions::balances` call as `balances` function
+    * Re-write `reshape2::melt` call as `wide2long` function
+
 ## balance 0.0.3
 ---------------------
 * Update `balance` method
