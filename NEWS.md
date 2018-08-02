@@ -1,3 +1,8 @@
+## balance 0.0.8
+---------------------
+* Update `balance` method
+    * Remove `size.line` argument and do not set size for `!weigh.var`
+
 ## balance 0.0.7
 ---------------------
 * Update `balance` method

@@ -17,7 +17,6 @@
 #'  by the proportion of explained variance. Only do this if balances
 #'  come from an SBP that decomposes variance.
 #' @param size.text An integer. Sets legend text size.
-#' @param size.line An integer. Sets line width size.
 #' @param size.pt An integer. Sets point size.
 #'
 #' @return A list of the "partition" \code{ggplot} object, the "distribution"
@@ -32,7 +31,6 @@ balance <- function(x, y,
                     boxplot.split = FALSE,
                     weigh.var = FALSE,
                     size.text = 20,
-                    size.line = 1,
                     size.pt = 4){
 
   cols <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
@@ -92,10 +90,7 @@ balance <- function(x, y,
   if(weigh.var){
     vars <- apply(B, 2, stats::var)
     vars <- vars/sum(vars)
-    linewidth <- data.frame("BalanceID" = colnames(B), "LineWidth" = size.line * vars)
-    dt <- merge(dt, linewidth)
-  }else{
-    linewidth <- data.frame("BalanceID" = colnames(B), "LineWidth" = size.line)
+    linewidth <- data.frame("BalanceID" = colnames(B), "LineWidth" = vars)
     dt <- merge(dt, linewidth)
   }
 
@@ -144,16 +139,25 @@ balance <- function(x, y,
   balance.distribution <-
     ggplot2::ggplot(dt, ggplot2::aes_string(x = "BalanceID", y = "SampleValue", group = "Group"), col = "black") +
     ggplot2::geom_boxplot(ggplot2::aes_string(col = "n.group")) + # if missing, set to "1"
-    ggplot2::geom_line(ggplot2::aes_string(size = "LineWidth")) + # keep unchanged to show range...
     ggplot2::geom_jitter(ggplot2::aes_string(col = "n.group"), size = size.pt) + # if missing, set to "1"
     ggplot2::scale_colour_manual(values = n.cols) + # if missing, set to "black"
     ggplot2::xlab("") + ggplot2::ylab("Sample-wise Distribution of Balance") +
     ggplot2::ylim(-1.1 * max(abs(dt$SampleValue)), 1.1 * max(abs(dt$SampleValue))) +
-    ggplot2::labs(col = "Sample Group") + ggplot2::guides(size = FALSE) +
+    ggplot2::labs(col = "Sample Group") +
     ggplot2::coord_flip() + ggplot2::theme_bw() +
     ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 90, hjust = 1, vjust = .5)) +
     ggplot2::theme(text = ggplot2::element_text(size = size.text)) +
     ggplot2::theme(legend.position = "top")
+
+  if(weigh.var){
+    balance.distribution <- balance.distribution +
+      ggplot2::geom_line(ggplot2::aes_string(size = "LineWidth")) + # keep unchanged to show range...
+      ggplot2::guides(size = FALSE)
+  }else{
+    balance.distribution <- balance.distribution +
+      ggplot2::geom_line() +
+      ggplot2::guides(size = FALSE)
+  }
 
   grid::grid.newpage()
   grob <- cbind(ggplot2::ggplotGrob(balance.partition),

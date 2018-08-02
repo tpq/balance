@@ -5,7 +5,7 @@
 \title{Calculate and Visualize Balances}
 \usage{
 balance(x, y, d.group, n.group, boxplot.split = FALSE, weigh.var = FALSE,
-  size.text = 20, size.line = 1, size.pt = 4)
+  size.text = 20, size.pt = 4)
 }
 \arguments{
 \item{x}{A matrix with rows as samples (N) and columns as components (D).}
@@ -27,8 +27,6 @@ by the proportion of explained variance. Only do this if balances
 come from an SBP that decomposes variance.}
 
 \item{size.text}{An integer. Sets legend text size.}
-
-\item{size.line}{An integer. Sets line width size.}
 
 \item{size.pt}{An integer. Sets point size.}
 }
