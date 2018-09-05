@@ -4,8 +4,8 @@
 \alias{balance}
 \title{Calculate and Visualize Balances}
 \usage{
-balance(x, y, d.group, n.group, boxplot.split = FALSE, weigh.var = FALSE,
-  size.text = 20, size.pt = 4)
+balance(x, y, d.group, n.group, boxplot.split = FALSE,
+  weigh.var = FALSE, size.text = 20, size.pt = 4)
 }
 \arguments{
 \item{x}{A matrix with rows as samples (N) and columns as components (D).}

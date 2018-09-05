@@ -1,3 +1,7 @@
+## balance 0.0.9
+---------------------
+* Add CITATION to package and DESCRIPTION
+
 ## balance 0.0.8
 ---------------------
 * Update `balance` method

@@ -1,6 +1,6 @@
 Package: balance
 Title: Visualize Balances of Compositional Data
-Version: 0.0.8
+Version: 0.0.9
 URL: http://github.com/tpq/balance
 BugReports: http://github.com/tpq/balance/issues
 Authors@R: c(
@@ -10,11 +10,12 @@ Description: Balances have become a cornerstone of compositional data analysis. 
  conceptualizing balances is difficult, especially for high-dimensional data. Most often,
  investigators visualize balances with "balance dendrograms". However, this visualization
  tool does not scale well for large data. This package provides an alternative scheme for
- visualizing balances.
+ visualizing balances, described in [Quinn (2018) <DOI:10.12688/f1000research.15858.1>].
 License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
+Encoding: UTF-8
 Imports:
     ggplot2,
     grid
