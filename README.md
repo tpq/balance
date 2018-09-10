@@ -32,27 +32,7 @@ With the data loaded, we can calculate and visualize the balances.
 res <- balance(expenditures, y1, size.text = 8)
 ```
 
-![](README-unnamed-chunk-4-1.png)
-
-Optionally, users can color components (in left figure) or samples (in right figure) based on a user-defined grouping. To do this, users must provide a vector of group labels for each component via the `d.group`argument (or for each sample via the `n.group` argument). Though, due to limitations imposed by the palette, there is a maximum of eight groupings allowed per vector.
-
-Here, we color components by a user-defined grouping.
-
-``` r
-res <- balance(expenditures, y1, d.group = c("A", "B", "A", "B", "C"), size.text = 8)
-```
-
-![](README-unnamed-chunk-5-1.png)
-
-Here, we color samples by a user-defined grouping.
-
-``` r
-res <- balance(expenditures, y1, n.group = c(rep("A", 10), rep("B", 10)), size.text = 8)
-```
-
-![](README-unnamed-chunk-6-1.png)
-
-Here, we do both.
+Optionally, users can color components (in left figure) or samples (in right figure) based on a user-defined grouping. To do this, users must provide a vector of group labels for each component via the `d.group`argument (or for each sample via the `n.group` argument). Here, we color components and samples by user-defined groupings.
 
 ``` r
 res <- balance(expenditures, y1,
@@ -61,22 +41,29 @@ res <- balance(expenditures, y1,
                size.text = 8)
 ```
 
-![](README-unnamed-chunk-7-1.png)
+Further reading
+---------------
 
-Modifying balance figures
--------------------------
-
-The `balance` function returns a list containing the "partition" `ggplot` object, the "distribution" `ggplot` object, and the per-sample balances.
+To learn more about `balance`, please see the vignette and relevant literature.
 
 ``` r
-library(ggthemes)
-custom1 <- res[[1]] + theme_excel() + scale_colour_excel()
-#> Scale for 'colour' is already present. Adding another scale for
-#> 'colour', which will replace the existing scale.
-custom2 <- res[[2]] + theme_excel() + scale_colour_excel()
-#> Scale for 'colour' is already present. Adding another scale for
-#> 'colour', which will replace the existing scale.
-balance.combine(custom1, custom2)
+citation("balance")
+#> 
+#> To cite balance in publications use:
+#> 
+#>   Quinn T. 2018. Visualizing balances of compositional data: A new
+#>   alternative to balance dendrograms. F1000Research, 7:1278. URL
+#>   http://f1000research.com/articles/7-1278/.
+#> 
+#> A BibTeX entry for LaTeX users is
+#> 
+#>   @Article{,
+#>     title = {Visualizing balances of compositional data: A new alternative to balance dendrograms},
+#>     author = {Thomas Quinn},
+#>     journal = {F1000Research},
+#>     year = {2018},
+#>     volume = {7},
+#>     number = {1278},
+#>     url = {http://f1000research.com/articles/7-1278/},
+#>   }
 ```
-
-![](README-unnamed-chunk-8-1.png)
