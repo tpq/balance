@@ -7,7 +7,7 @@
 #' @return A transformation of samples for the balance provided.
 #'
 #' @export
-balance.compute <- function(x, contrast){
+balance.fromContrast <- function(x, contrast){
 
   if(length(contrast) != ncol(x)) stop("Contrast must have length ncol(x) = D.")
   if(any(!contrast %in% c(-1, 0, 1))) stop("Contrast must contain [-1, 0, 1] only.")
@@ -33,9 +33,9 @@ balance.compute <- function(x, contrast){
 #' @return A transformation of samples for each balance in the SBP matrix.
 #'
 #' @export
-balances <- function(x, y){
+balance.fromSBP <- function(x, y){
 
-  res <- apply(y, 2, function(z) balance.compute(x, z))
+  res <- apply(y, 2, function(z) balance.fromContrast(x, z))
   rownames(res) <- as.character(1:nrow(res))
   return(res)
 }
