@@ -28,7 +28,7 @@
 balance.plot <- function(x, y,
                          d.group,
                          n.group,
-                         boxplot.split = FALSE,
+                         boxplot.split = TRUE,
                          weigh.var = FALSE,
                          size.text = 20,
                          size.pt = 4){
@@ -138,8 +138,8 @@ balance.plot <- function(x, y,
 
   balance.distribution <-
     ggplot2::ggplot(dt, ggplot2::aes_string(x = "BalanceID", y = "SampleValue", group = "Group"), col = "black") +
-    ggplot2::geom_boxplot(ggplot2::aes_string(col = "n.group")) + # if missing, set to "1"
-    ggplot2::geom_jitter(ggplot2::aes_string(col = "n.group"), size = size.pt) + # if missing, set to "1"
+    ggplot2::geom_boxplot(ggplot2::aes_string(col = "n.group"), position = ggplot2::position_dodge(0.8)) + # if missing, n.group set to "1"
+    ggplot2::geom_point(ggplot2::aes_string(col = "n.group"), size = size.pt, position = ggplot2::position_dodge(0.8)) + # if missing, n.group set to "1"
     ggplot2::scale_colour_manual(values = n.cols) + # if missing, set to "black"
     ggplot2::xlab("") + ggplot2::ylab("Sample-wise Distribution of Balance") +
     ggplot2::ylim(-1.1 * max(abs(dt$SampleValue)), 1.1 * max(abs(dt$SampleValue))) +

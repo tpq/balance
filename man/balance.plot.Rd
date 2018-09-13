@@ -4,7 +4,7 @@
 \alias{balance.plot}
 \title{Calculate and Visualize Balances}
 \usage{
-balance.plot(x, y, d.group, n.group, boxplot.split = FALSE,
+balance.plot(x, y, d.group, n.group, boxplot.split = TRUE,
   weigh.var = FALSE, size.text = 20, size.pt = 4)
 }
 \arguments{
