@@ -1,3 +1,11 @@
+## balance 0.1.0
+---------------------
+* Modify function names
+    * Rename `balance()` to `balance.plot()`
+    * Create `balance()` wrapper for backwards compatibility
+    * Rename `balance.compute()` to `balance.fromContrast()`
+    * Rename `balances()` to `balance.fromSBP()`
+
 ## balance 0.0.9
 ---------------------
 * Add CITATION to package and DESCRIPTION
