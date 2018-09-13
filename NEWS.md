@@ -1,3 +1,10 @@
+## balance 0.1.1
+---------------------
+* Modify `balance.plot` function
+    * All points now overlap with their boxplot when `boxplot.split = TRUE`
+* Revise vignette and README
+    * Use `balance.plot()` instead of `balance()`
+
 ## balance 0.1.0
 ---------------------
 * Modify function names
