@@ -35,24 +35,24 @@ We will demonstrate this package using an example from the `robCompositions` pac
 
 ```{r}
 data(expenditures, package = "robCompositions")
-y1 <- data.frame(c(1,1,1,-1,-1),c(1,-1,-1,0,0),
-                 c(0,+1,-1,0,0),c(0,0,0,+1,-1))
+y1 <- data.frame(c(1, 1, 1, -1, -1), c(1, -1, -1, 0, 0),
+                 c(0, +1, -1, 0, 0), c(0, 0, 0, +1, -1))
 colnames(y1) <- paste0("z", 1:4)
 ```
 
 With the data loaded, we can calculate and visualize the balances.
 
 ```{r, eval = FALSE}
-res <- balance(expenditures, y1, size.text = 8)
+res <- balance.plot(expenditures, y1, size.text = 8)
 ```
 
 Optionally, users can color components (in left figure) or samples (in right figure) based on a user-defined grouping. To do this, users must provide a vector of group labels for each component via the `d.group`argument (or for each sample via the `n.group` argument). Here, we color components and samples by user-defined groupings.
 
 ```{r, eval = FALSE}
-res <- balance(expenditures, y1,
-               d.group = c("A", "B", "A", "B", "C"),
-               n.group = c(rep("A", 10), rep("B", 10)),
-               size.text = 8)
+res <- balance.plot(expenditures, y1,
+                    d.group = c("A", "B", "A", "B", "C"),
+                    n.group = c(rep("A", 10), rep("B", 10)),
+                    size.text = 8)
 ```
 
 ## Further reading
