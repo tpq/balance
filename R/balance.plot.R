@@ -25,13 +25,13 @@
 #' @author Thom Quinn
 #'
 #' @export
-balance <- function(x, y,
-                    d.group,
-                    n.group,
-                    boxplot.split = FALSE,
-                    weigh.var = FALSE,
-                    size.text = 20,
-                    size.pt = 4){
+balance.plot <- function(x, y,
+                         d.group,
+                         n.group,
+                         boxplot.split = FALSE,
+                         weigh.var = FALSE,
+                         size.text = 20,
+                         size.pt = 4){
 
   cols <- c("#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3",
             "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3")
@@ -79,7 +79,7 @@ balance <- function(x, y,
   pt$Group <- paste0(pt$BalanceID, pt$Part) # for geom_line()
 
   # Prepare balance.distribution plot
-  B <- balances(x, y)
+  B <- balance.fromSBP(x, y)
   colnames(B) <- colnames(y)
   rownames(B) <- rownames(x)
   dt <- wide2long(B)
@@ -172,4 +172,16 @@ balance <- function(x, y,
       B
     )
   )
+}
+
+#' Calculate and Visualize Balances
+#'
+#' This function wraps \code{\link{balance.plot}}.
+#'
+#' @param ... Arguments to \code{\link{balance.plot}}.
+#'
+#' @export
+balance <- function(...){
+
+  balance.plot(...)
 }

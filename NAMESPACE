@@ -2,6 +2,7 @@
 
 export(balance)
 export(balance.combine)
-export(balance.compute)
-export(balances)
+export(balance.fromContrast)
+export(balance.fromSBP)
+export(balance.plot)
 export(wide2long)
