@@ -1,6 +1,6 @@
 Package: balance
 Title: Visualize Balances of Compositional Data
-Version: 0.1.1
+Version: 0.1.2
 URL: http://github.com/tpq/balance
 BugReports: http://github.com/tpq/balance/issues
 Authors@R: c(
@@ -22,8 +22,10 @@ Imports:
 Depends:
     R (>= 3.2.2)
 Suggests:
+    ape,
     ggthemes,
     knitr,
+    philr,
     reshape2,
     rmarkdown,
     robCompositions,
