@@ -1,6 +1,6 @@
 ## balance 0.1.2
 ---------------------
-* Add functions to modify SBP
+* Add functions to create an SBP matrix
     * New `sbp.fromHclust` creates SBP matrix from `hclust` object
     * New `sbp.sort` sorts an SBP matrix predictably
 
