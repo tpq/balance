@@ -51,7 +51,28 @@ sbp.fromHclust <- function(hclust){
   }
 
   # Sort balances by tree height
-  return(t(out[nrow(out):1,]))
+  sbp <- t(out[nrow(out):1,])
+  colnames(sbp) <- paste0("z", 1:ncol(sbp))
+  sbp
+}
+
+#' Build SBP Matrix of Principal Balances
+#'
+#' This function builds an SBP of principal balances using the
+#'  hierarchical clustering of components method described
+#'  by Pawlowsky-Glahn et al. in "Principal balances"
+#'  from the CoDaWork 2011 proceedings.
+#'
+#' @inheritParams vlr
+#'
+#' @return An SBP matrix.
+#'
+#' @export
+sbp.fromPBA <- function(x, alpha = NA){
+
+  vlr <- vlr(x, alpha)
+  h <- stats::hclust(stats::as.dist(vlr), method = "ward.D2")
+  sbp.fromHclust(h)
 }
 
 #' Sort SBP Matrix
