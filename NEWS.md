@@ -1,3 +1,12 @@
+## balance 0.1.3
+---------------------
+* Add functions to perform a principal balance analysis
+    * New `vlr` function calculates log-ratio variance using matrix algebra
+    * New `sbp.fromPBA` function builds an SBP of principal balances
+    * New `pba` object
+        * New `pba` function constructs `pba` object
+        * New `predict` method deploys `pba` model
+
 ## balance 0.1.2
 ---------------------
 * Add functions to create an SBP matrix

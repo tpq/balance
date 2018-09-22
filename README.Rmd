@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 Welcome to the `balance` GitHub page!
 
-Balances have become a cornerstone of compositional data analysis. However, conceptualizing balances is difficult, especially for high-dimensional data. Most often, investigators visualize balances with "balance dendrograms". However, this visualization tool does not scale well for large data. This package provides an alternative scheme for visualizing balances.
+Balances have become a cornerstone of compositional data analysis. However, conceptualizing balances is difficult, especially for high-dimensional data. Most often, investigators visualize balances with "balance dendrograms". However, this visualization tool does not scale well for large data. This package provides an alternative scheme for visualizing balances. This package also provides a method for principal balance analysis.
 
 ```{r, eval = FALSE}
 library(devtools)
