@@ -1,3 +1,11 @@
+## balance 0.1.4
+---------------------
+* Extend zero handling
+    * `vlr` will now replace 0s with next smallest value
+    * `balance.fromSBP` will now replace 0s with next smallest value
+    * New `pba.show` method shows object structure
+    * New `pba.plot` method plots balances in 2D
+
 ## balance 0.1.3
 ---------------------
 * Add functions to perform a principal balance analysis

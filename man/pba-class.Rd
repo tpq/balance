@@ -3,22 +3,51 @@
 \docType{class}
 \name{pba-class}
 \alias{pba-class}
+\alias{show,pba-method}
 \alias{predict,pba-method}
+\alias{plot,pba,missing-method}
+\alias{plot,pba,matrix-method}
+\alias{plot,pba,data.frame-method}
 \title{A pba model S4 class}
 \usage{
-\S4method{predict}{pba}(object, newdata)
+\S4method{show}{pba}(object)
+
+\S4method{predict}{pba}(object, y)
+
+\S4method{plot}{pba,missing}(x, y, group, pb1 = 1, pb2 = 2,
+  size.text = 18)
+
+\S4method{plot}{pba,matrix}(x, y, group, pb1 = 1, pb2 = 2,
+  size.text = 18)
+
+\S4method{plot}{pba,data.frame}(x, y, group, pb1 = 1, pb2 = 2,
+  size.text = 18)
 }
 \arguments{
-\item{object}{A \code{pba} object.}
+\item{object, x}{A \code{pba} object.}
 
-\item{newdata}{A matrix.}
+\item{y}{A matrix on which to deploy the \code{pba} model.}
+
+\item{group}{A character vector. Group labels used to color points.}
+
+\item{pb1, pb2}{An integer. Sets principal balances to plot.}
+
+\item{size.text}{An integer. Sets legend text size.}
 }
 \description{
 A pba model S4 class
 }
 \section{Methods (by generic)}{
 \itemize{
+\item \code{show}: Method to show \code{pba} model.
+
 \item \code{predict}: Method to deploy \code{pba} model.
+
+\item \code{plot}: Method to plot \code{pba} model.
+
+\item \code{plot}: Method to plot \code{pba} model.
+
+\item \code{plot}: Method to plot \code{pba} model.
 }}
 
 \section{Slots}{
