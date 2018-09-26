@@ -1,8 +1,15 @@
+## balance 0.1.5
+---------------------
+* Update `pba` methods
+    * `pba.plot` no longer prints variance when `y` is provided
+    * `vlr` now uses less peak RAM
+
 ## balance 0.1.4
 ---------------------
 * Extend zero handling
     * `vlr` will now replace 0s with next smallest value
     * `balance.fromSBP` will now replace 0s with next smallest value
+* Extend `pba` methods
     * New `pba.show` method shows object structure
     * New `pba.plot` method plots balances in 2D
 
