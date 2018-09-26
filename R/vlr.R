@@ -38,17 +38,15 @@ vlr <- function(x, alpha = NA){
   # Calculate A %*% B
   ab <- t(logX) %*% logX
   dots <- diag(ab)
-  dot.b <- dots %*% t(id)
-  dot.a <- id %*% t(dots)
+  dot.join <- dots %*% t(id) + id %*% t(dots)
 
   # Calculate sums
   sums <- colSums(logX)
-  sum.b <- sums %*% t(id)
-  sum.a <- id %*% t(sums)
+  sum.diff <- sums %*% t(id) - id %*% t(sums)
 
   # Calculate VLR
-  out <- ((dot.a + dot.b - 2 * ab) -
-            (sum.a - sum.b)^2 / (N)) / (N - 1)
+  out <- ((dot.join - 2 * ab) -
+            (sum.diff)^2 / (N)) / (N - 1)
 
   rownames(out) <- colnames(out)
   out
