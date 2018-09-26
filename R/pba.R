@@ -102,9 +102,9 @@ setMethod("plot", signature(x = "pba", y = "missing"),
             colnames(df) <- c("First", "Second", "group")
             ggplot2::ggplot(df, ggplot2::aes_string(x = "First", y = "Second", col = "group")) +
               ggplot2::geom_point() +
-              ggplot2::xlab(paste0(names[1], " [x var explained: ",
+              ggplot2::xlab(paste0(names[1], " [var explained: ",
                                    round(x@subvar[pb1]*100, 2), "%]")) +
-              ggplot2::ylab(paste0(names[2], " [x var explained: ",
+              ggplot2::ylab(paste0(names[2], " [var explained: ",
                                    round(x@subvar[pb2]*100, 2), "%]")) +
               ggplot2::scale_color_brewer(palette = "Set2") +
               ggplot2::labs(col = "Sample Group") +
@@ -125,10 +125,8 @@ setMethod("plot", signature(x = "pba", y = "matrix"),
             colnames(df) <- c("First", "Second", "group")
             ggplot2::ggplot(df, ggplot2::aes_string(x = "First", y = "Second", col = "group")) +
               ggplot2::geom_point() +
-              ggplot2::xlab(paste0(names[1], " [x var explained: ",
-                                   round(x@subvar[pb1]*100, 2), "%]")) +
-              ggplot2::ylab(paste0(names[2], " [x var explained: ",
-                                   round(x@subvar[pb2]*100, 2), "%]")) +
+              ggplot2::xlab(names[1]) +
+              ggplot2::ylab(names[2]) +
               ggplot2::scale_color_brewer(palette = "Set2") +
               ggplot2::labs(col = "Sample Group") +
               ggplot2::theme_bw() +
