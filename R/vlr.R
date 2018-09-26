@@ -17,6 +17,13 @@ vlr <- function(x, alpha = NA){
 
   if(is.na(alpha)){
 
+    if(any(x == 0)){
+
+      message("Alert: Replacing 0s with next smallest value to calculate log-ratio variances.")
+      zeros <- x == 0
+      x[zeros] <- min(x[!zeros])
+    }
+
     logX <- log(x)
 
   }else{

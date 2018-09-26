@@ -35,6 +35,15 @@ balance.fromContrast <- function(x, contrast){
 #' @export
 balance.fromSBP <- function(x, y){
 
+  x <- as.matrix(x)
+
+  if(any(x == 0)){
+
+    message("Alert: Replacing 0s with next smallest value to calculate balances.")
+    zeros <- x == 0
+    x[zeros] <- min(x[!zeros])
+  }
+
   res <- apply(y, 2, function(z) balance.fromContrast(x, z))
   rownames(res) <- as.character(1:nrow(res))
   return(res)
