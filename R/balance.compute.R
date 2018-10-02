@@ -6,6 +6,15 @@
 #'
 #' @return A transformation of samples for the balance provided.
 #'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' balance.fromContrast(x, sbp[,1])
+#'
 #' @export
 balance.fromContrast <- function(x, contrast){
 
@@ -16,12 +25,11 @@ balance.fromContrast <- function(x, contrast){
   lneg <- sum(contrast == -1)
   const <- sqrt((lpos*lneg)/(lpos+lneg))
 
-  apply(x, 1, function(sample){
-    ipos <- sample[contrast == 1]
-    ineg <- sample[contrast == -1]
-    geomean <- function(i) exp(mean(log(i)))
-    const * log(geomean(ipos) / geomean(ineg))
-  })
+  logX <- log(x)
+  ipos <- rowMeans(logX[, contrast == 1, drop = FALSE])
+  ineg <- rowMeans(logX[, contrast == -1, drop = FALSE])
+
+  const * log(exp(ipos) / exp(ineg))
 }
 
 #' Compute Balances from an SBP Matrix
@@ -31,6 +39,15 @@ balance.fromContrast <- function(x, contrast){
 #'  columns as balances (D-1).
 #'
 #' @return A transformation of samples for each balance in the SBP matrix.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' balance.fromSBP(x, sbp)
 #'
 #' @export
 balance.fromSBP <- function(x, y){
