@@ -1,3 +1,12 @@
+## balance 0.1.6
+---------------------
+* Update `balance` methods
+    * `balance` now returns an S4 object called `bplot`
+    * `bplot` has `[[` method for backwards compatibility
+    * `balance.fromContrast` now 2x faster
+* Update documentation
+    * An example is now provided for each function
+
 ## balance 0.1.5
 ---------------------
 * Update `pba` methods
