@@ -64,3 +64,16 @@ A pba model S4 class
 \item{\code{subvar}}{A numeric vector. The fractional variance per balance.}
 }}
 
+\examples{
+library(balance)
+data(iris)
+train <- iris[1:50,1:4]
+test <- iris[51:150,1:4]
+model <- pba(train)
+predict(model, test)
+plot(model, test)
+
+}
+\author{
+Thom Quinn
+}

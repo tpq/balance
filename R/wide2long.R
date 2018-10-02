@@ -4,6 +4,15 @@
 #'
 #' @return A data set in long format.
 #'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' wide2long(sbp)
+#'
 #' @export
 wide2long <- function(wide){
 

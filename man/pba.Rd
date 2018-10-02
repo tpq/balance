@@ -28,3 +28,16 @@ This resultant object contains the original data, the serial
  variances per balance. Use \code{predict} to deploy the
  \code{pba} model on new data.
 }
+\examples{
+library(balance)
+data(iris)
+train <- iris[1:50,1:4]
+test <- iris[51:150,1:4]
+model <- pba(train)
+predict(model, test)
+plot(model, test)
+
+}
+\author{
+Thom Quinn
+}

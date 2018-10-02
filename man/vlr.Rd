@@ -20,3 +20,13 @@ A VLR matrix.
 This function calculates the log-ratio variance
  for all components in a matrix.
 }
+\examples{
+library(balance)
+data(iris)
+x <- iris[,1:4]
+vlr(x)
+
+}
+\author{
+Thom Quinn
+}

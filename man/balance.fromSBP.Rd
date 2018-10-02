@@ -18,3 +18,14 @@ A transformation of samples for each balance in the SBP matrix.
 \description{
 Compute Balances from an SBP Matrix
 }
+\examples{
+library(balance)
+data(iris)
+x <- iris[,1:4]
+sbp <- sbp.fromPBA(x)
+balance.fromSBP(x, sbp)
+
+}
+\author{
+Thom Quinn
+}

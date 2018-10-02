@@ -22,3 +22,13 @@ This function builds an SBP of principal balances using the
  by Pawlowsky-Glahn et al. in "Principal balances"
  from the CoDaWork 2011 proceedings.
 }
+\examples{
+library(balance)
+data(iris)
+x <- iris[,1:4]
+sbp.fromPBA(x)
+
+}
+\author{
+Thom Quinn
+}

@@ -10,6 +10,14 @@
 #'
 #' @return A VLR matrix.
 #'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' vlr(x)
+#'
 #' @export
 vlr <- function(x, alpha = NA){
 

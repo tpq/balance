@@ -16,3 +16,13 @@ An SBP matrix.
 This function builds an SBP matrix from an \code{hclust} object
  as produced by the \code{hclust} function.
 }
+\examples{
+library(balance)
+data(cars)
+h <- hclust(dist(cars))
+sbp.fromHclust(h)
+
+}
+\author{
+Thom Quinn
+}

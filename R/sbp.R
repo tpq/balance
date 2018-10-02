@@ -7,6 +7,14 @@
 #'
 #' @return An SBP matrix.
 #'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(cars)
+#' h <- hclust(dist(cars))
+#' sbp.fromHclust(h)
+#'
 #' @export
 sbp.fromHclust <- function(hclust){
 
@@ -67,6 +75,14 @@ sbp.fromHclust <- function(hclust){
 #'
 #' @return An SBP matrix.
 #'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp.fromPBA(x)
+#'
 #' @export
 sbp.fromPBA <- function(x, alpha = NA){
 
@@ -80,6 +96,15 @@ sbp.fromPBA <- function(x, alpha = NA){
 #' @param sbp An SBP matrix.
 #'
 #' @return An SBP matrix.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' sbp.sort(sbp)
 #'
 #' @export
 sbp.sort <- function(sbp){

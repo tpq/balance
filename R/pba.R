@@ -12,6 +12,17 @@
 #' @slot totvar A numeric vector. The total variance per balance.
 #' @slot subvar A numeric vector. The fractional variance per balance.
 #'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' train <- iris[1:50,1:4]
+#' test <- iris[51:150,1:4]
+#' model <- pba(train)
+#' predict(model, test)
+#' plot(model, test)
+#'
 #' @export
 setClass("pba",
          slots = c(
@@ -38,6 +49,17 @@ setClass("pba",
 #' @inheritParams vlr
 #'
 #' @return A \code{pba} object.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' train <- iris[1:50,1:4]
+#' test <- iris[51:150,1:4]
+#' model <- pba(train)
+#' predict(model, test)
+#' plot(model, test)
 #'
 #' @export
 pba <- function(x, alpha = NA){

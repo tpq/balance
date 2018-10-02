@@ -15,3 +15,14 @@ A data set in long format.
 \description{
 Make Long Data from Wide Data
 }
+\examples{
+library(balance)
+data(iris)
+x <- iris[,1:4]
+sbp <- sbp.fromPBA(x)
+wide2long(sbp)
+
+}
+\author{
+Thom Quinn
+}
