@@ -1,3 +1,58 @@
+#' A pba model S4 class
+#'
+#' @param object,x A \code{bplot} object.
+#' @param i An integer. Used to index the \code{bplot} object.
+#'
+#' @slot balance.partition A \code{ggplot} object. The "partition" sub-plot.
+#' @slot balance.distribution A \code{ggplot} object. The "distribution" sub-plot.
+#' @slot balances The results of \code{balance.fromSBP}.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' balance(x, sbp)
+#'
+#' @export
+setClass("bplot",
+         slots = c(
+           balance.partition = "ANY",
+           balance.distribution = "ANY",
+           balances = "ANY"
+         )
+)
+
+#' @describeIn bplot Method to show \code{bplot} object.
+#' @export
+setMethod("show", "bplot",
+          function(object){
+
+            cat("@balance.partition: access with x[[1]]\n")
+            cat("@balance.distribution: access with x[[2]]\n")
+            cat("@balances: access with x[[3]]\n")
+          }
+)
+
+#' @describeIn bplot Method to subset \code{bplot} object.
+#' @export
+setMethod("[[", "bplot",
+          function(x, i){
+
+            if(i == 1){
+              x@balance.partition
+            }else if(i == 2){
+              x@balance.distribution
+            }else if(i == 3){
+              x@balances
+            }else{
+              stop("subscript out of bounds")
+            }
+          }
+)
+
 #' Calculate and Visualize Balances
 #'
 #' This function calculates balances based on the compositional data
@@ -23,6 +78,13 @@
 #'  \code{ggplot} object, and the per-sample balances.
 #'
 #' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' balance(x, sbp)
 #'
 #' @export
 balance.plot <- function(x, y,
@@ -165,13 +227,13 @@ balance.plot <- function(x, y,
                 size = "first")
   grid::grid.draw(grob)
 
-  return(
-    list(
-      balance.partition,
-      balance.distribution,
-      B
-    )
-  )
+  # Return results as bplot object
+  res <- methods::new("bplot")
+  res@balance.partition <- balance.partition
+  res@balance.distribution <- balance.distribution
+  res@balances <- B
+
+  return(res)
 }
 
 #' Calculate and Visualize Balances
@@ -184,4 +246,36 @@ balance.plot <- function(x, y,
 balance <- function(...){
 
   balance.plot(...)
+}
+
+#' Combine Two Sub-Plots
+#'
+#' This function combines the "partition" sub-plot with the
+#'  "distribution" sub-plot, preserving scale.
+#'
+#' @param balance.partition A \code{ggplot} object. The "partition" sub-plot.
+#' @param balance.distribution A \code{ggplot} object. The "distribution" sub-plot.
+#' @param size A string. Toggles whether to size final figure based on
+#'  "first" (partition) or "last" (distribution) figure provided.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp <- sbp.fromPBA(x)
+#' res <- balance(x, sbp)
+#' custom1 <- res[[1]] + ggplot2::theme_dark()
+#' custom2 <- res[[2]] + ggplot2::theme_dark()
+#' balance.combine(custom1, custom2)
+#'
+#' @export
+balance.combine <- function(balance.partition, balance.distribution, size = "first"){
+
+  grid::grid.newpage()
+  grob <- cbind(ggplot2::ggplotGrob(balance.partition),
+                ggplot2::ggplotGrob(balance.distribution),
+                size = size)
+  grid::grid.draw(grob)
 }

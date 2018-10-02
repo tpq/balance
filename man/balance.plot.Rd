@@ -39,6 +39,14 @@ This function calculates balances based on the compositional data
  set and serial binary partition (SBP) matrix provided, then generates a
  figure from the results.
 }
+\examples{
+library(balance)
+data(iris)
+x <- iris[,1:4]
+sbp <- sbp.fromPBA(x)
+balance(x, sbp)
+
+}
 \author{
 Thom Quinn
 }
