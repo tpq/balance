@@ -1,16 +1,30 @@
-#' A pba model S4 class
+#' Principal Balance Analysis
 #'
-#' @param object,x A \code{pba} object.
-#' @param y A matrix on which to deploy the \code{pba} model.
-#' @param group A character vector. Group labels used to color points.
-#' @param pb1,pb2 An integer. Sets principal balances to plot.
-#' @param size.text An integer. Sets legend text size.
+#' @details
+#' The \code{pba} function performs a principal balance analysis
+#'  using the hierarchical clustering of components method described
+#'  by Pawlowsky-Glahn et al. in "Principal balances"
+#'  from the CoDaWork 2011 proceedings.
+#'
+#' This resultant object contains the original data, the serial
+#'  binary partition, the principal balances, and the fractional
+#'  variances per balance. Use \code{predict} to deploy the
+#'  \code{pba} model on new data.
 #'
 #' @slot data A matrix. The original data.
 #' @slot sbp A matrix. The SBP matrix.
 #' @slot pba A matrix. The balances.
 #' @slot totvar A numeric vector. The total variance per balance.
 #' @slot subvar A numeric vector. The fractional variance per balance.
+#'
+#' @inheritParams vlr
+#' @param object,x A \code{pba} object.
+#' @param y A matrix on which to deploy the \code{pba} model.
+#' @param group A character vector. Group labels used to color points.
+#' @param pb1,pb2 An integer. Sets principal balances to plot.
+#' @param size.text An integer. Sets legend text size.
+#'
+#' @return Returns a \code{pba} object.
 #'
 #' @author Thom Quinn
 #'
@@ -23,6 +37,10 @@
 #' predict(model, test)
 #' plot(model, test)
 #'
+#' @name pba
+NULL
+
+#' @rdname pba
 #' @export
 setClass("pba",
          slots = c(
@@ -34,33 +52,7 @@ setClass("pba",
          )
 )
 
-#' Principal Balance Analysis
-#'
-#' This function performs a principal balance analysis using the
-#'  hierarchical clustering of components method described
-#'  by Pawlowsky-Glahn et al. in "Principal balances"
-#'  from the CoDaWork 2011 proceedings.
-#'
-#' This resultant object contains the original data, the serial
-#'  binary partition, the principal balances, and the fractional
-#'  variances per balance. Use \code{predict} to deploy the
-#'  \code{pba} model on new data.
-#'
-#' @inheritParams vlr
-#'
-#' @return A \code{pba} object.
-#'
-#' @author Thom Quinn
-#'
-#' @examples
-#' library(balance)
-#' data(iris)
-#' train <- iris[1:50,1:4]
-#' test <- iris[51:150,1:4]
-#' model <- pba(train)
-#' predict(model, test)
-#' plot(model, test)
-#'
+#' @rdname pba
 #' @export
 pba <- function(x, alpha = NA){
 
@@ -75,7 +67,9 @@ pba <- function(x, alpha = NA){
   object
 }
 
-#' @describeIn pba Method to show \code{pba} model.
+#' @rdname pba
+#' @section Methods (by generic):
+#' \code{show:} Method to show \code{pba} object.
 #' @export
 setMethod("show", "pba",
           function(object){
@@ -104,7 +98,9 @@ setMethod("show", "pba",
           }
 )
 
-#' @describeIn pba Method to deploy \code{pba} model.
+#' @rdname pba
+#' @section Methods (by generic):
+#' \code{predict:} Method to deploy \code{pba} object.
 #' @export
 setMethod("predict", "pba",
           function(object, y){
@@ -113,7 +109,9 @@ setMethod("predict", "pba",
           }
 )
 
-#' @describeIn pba Method to plot \code{pba} model.
+#' @rdname pba
+#' @section Methods (by generic):
+#' \code{plot:} Method to plot \code{pba} object.
 #' @export
 setMethod("plot", signature(x = "pba", y = "missing"),
           function(x, y, group, pb1 = 1, pb2 = 2, size.text = 18){
@@ -136,7 +134,7 @@ setMethod("plot", signature(x = "pba", y = "missing"),
           }
 )
 
-#' @describeIn pba Method to plot \code{pba} model.
+#' @rdname pba
 #' @export
 setMethod("plot", signature(x = "pba", y = "matrix"),
           function(x, y, group, pb1 = 1, pb2 = 2, size.text = 18){
@@ -157,7 +155,7 @@ setMethod("plot", signature(x = "pba", y = "matrix"),
           }
 )
 
-#' @describeIn pba Method to plot \code{pba} model.
+#' @rdname pba
 #' @export
 setMethod("plot", signature(x = "pba", y = "data.frame"),
           function(x, y, group, pb1 = 1, pb2 = 2, size.text = 18){

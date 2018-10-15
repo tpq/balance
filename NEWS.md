@@ -1,3 +1,9 @@
+## balance 0.1.7
+---------------------
+* Update documentation
+    * Place all `pba` functions within `?pba` help file
+    * Make `pba` method help more accessible
+
 ## balance 0.1.6
 ---------------------
 * Update `balance` methods
