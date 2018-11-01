@@ -1,3 +1,17 @@
+#' Package Check
+#'
+#' Checks whether the user has the required package installed.
+#'  For back-end use only.
+#'
+#' @param package A character string. An R package.
+packageCheck <- function(package){
+
+  if(!requireNamespace(package, quietly = TRUE)){
+    stop("Uh oh! This propr method depends on ", package, "! ",
+         "Try running: install.packages('", package, "')")
+  }
+}
+
 #' Make Long Data from Wide Data
 #'
 #' @param wide A data set in wide format.
