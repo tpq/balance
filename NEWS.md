@@ -1,7 +1,7 @@
 ## balance 0.1.8
 ---------------------
 * Add `sbp` methods
-    * New `sbp.subset` returns ternary or ratio balances
+    * New `sbp.subset` returns named ternary or ratio balances
     * New `sbp.fromRandom` returns random binary tree
     * New `sbp.fromABA` returns modified PBA tree
     * New `sbp.fromPropd`returns theta tree

@@ -286,5 +286,8 @@ sbp.subset <- function(sbp, ternary = TRUE, ratios = TRUE){
   keep <- rep(FALSE, ncol(sbp))
   if(ternary) keep <- keep | b.size == 3
   if(ratios) keep <- keep | b.size == 2
-  sbp[,keep]
+  sbp <- sbp[,keep]
+  joinNames <- function(x) make.names(paste0(sort(x), collapse = "_and_"))
+  colnames(sbp) <- apply(sbp, 2, function(x) joinNames(rownames(sbp)[x != 0]))
+  sbp
 }
