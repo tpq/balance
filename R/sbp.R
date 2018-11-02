@@ -278,13 +278,24 @@ sbp.subset <- function(sbp, ternary = TRUE, ratios = TRUE){
 
   if(!ternary & !ratios){
 
-    message("Alert: Skipping balance extraction.")
+    message("Alert: Skipping balance subset.")
     return(sbp)
+  }
+
+  if(ternary & !ratios){
+
+    message("Alert: Using 'ternary' enables 'ratios' too.")
+    ratios <- TRUE
   }
 
   b.size <- apply(sbp, 2, function(x) sum(abs(x)))
   keep <- rep(FALSE, ncol(sbp))
-  if(ternary) keep <- keep | b.size == 3
-  if(ratios) keep <- keep | b.size == 2
-  sbp[,keep]
+  if(ternary) keep <- keep | (b.size == 3)
+  if(ratios) keep <- keep | (b.size == 2)
+  sbp <- sbp[, keep, drop = FALSE]
+
+  # Name balances from involved features
+  joinNames <- function(x) make.names(paste0(sort(x), collapse = "_and_"))
+  colnames(sbp) <- apply(sbp, 2, function(x) joinNames(rownames(sbp)[x != 0]))
+  sbp
 }
