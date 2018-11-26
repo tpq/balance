@@ -213,8 +213,6 @@ sbp.fromPropd <- function(x, group, ...){
 
   pd <- propr::propd(x, group, ...)
   theta <- propr::getMatrix(pd)
-  rownames(theta) <- colnames(x)
-  colnames(theta) <- colnames(x)
   h <- stats::hclust(stats::as.dist(theta))
   sbp.fromHclust(h)
 }
