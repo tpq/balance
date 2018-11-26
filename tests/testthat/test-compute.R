@@ -3,6 +3,7 @@ library(balance)
 data(expenditures, package = "robCompositions")
 y1 <- data.frame(c(1,1,1,-1,-1),c(1,-1,-1,0,0),
                  c(0,+1,-1,0,0),c(0,0,0,+1,-1))
+rownames(y1) <- colnames(expenditures)
 colnames(y1) <- paste0("z", 1:4)
 
 a <- robCompositions::balances(expenditures, y1)[[1]]

@@ -1,3 +1,8 @@
+## balance 0.1.9
+---------------------
+* Update `balance` methods
+    * Check for equivalent names in `balance.fromSBP` call
+
 ## balance 0.1.8
 ---------------------
 * Add `sbp` methods

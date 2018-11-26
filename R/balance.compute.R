@@ -52,6 +52,11 @@ balance.fromContrast <- function(x, contrast){
 #' @export
 balance.fromSBP <- function(x, y){
 
+  if(!identical(colnames(x), rownames(y))){
+
+    stop("Component names for data matrix and balance matrix do not match.")
+  }
+
   x <- as.matrix(x)
 
   if(any(x == 0)){
