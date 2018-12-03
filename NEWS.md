@@ -2,6 +2,8 @@
 ---------------------
 * Update `balance` methods
     * Check for equivalent names in `balance.fromSBP` call
+    * No longer export `balance.fromContrast` function
+    * Add `sbp.fromHclust` test
 
 ## balance 0.1.8
 ---------------------
