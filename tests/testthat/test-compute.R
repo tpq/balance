@@ -9,7 +9,7 @@ colnames(y1) <- paste0("z", 1:4)
 a <- robCompositions::balances(expenditures, y1)[[1]]
 colnames(a) <- paste0("z", 1:4)
 rownames(a) <- as.character(1:nrow(a))
-b <- apply(y1, 2, function(z) balance.fromContrast(expenditures, z))
+b <- apply(y1, 2, function(z) balance:::balance.fromContrast(expenditures, z))
 rownames(b) <- as.character(1:nrow(b))
 c <- balance::balance.fromSBP(expenditures, y1)
 

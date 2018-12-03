@@ -18,14 +18,3 @@ A transformation of samples for the balance provided.
 \description{
 Transform Samples with the ilr of a Balance
 }
-\examples{
-library(balance)
-data(iris)
-x <- iris[,1:4]
-sbp <- sbp.fromPBA(x)
-balance.fromContrast(x, sbp[,1])
-
-}
-\author{
-Thom Quinn
-}

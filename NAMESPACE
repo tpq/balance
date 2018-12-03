@@ -2,7 +2,6 @@
 
 export(balance)
 export(balance.combine)
-export(balance.fromContrast)
 export(balance.fromSBP)
 export(balance.plot)
 export(pba)
