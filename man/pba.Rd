@@ -11,7 +11,7 @@
 \alias{plot,pba,data.frame-method}
 \title{Principal Balance Analysis}
 \usage{
-pba(x, alpha = NA)
+pba(x, how = "sbp.fromPBA", ...)
 
 \S4method{show}{pba}(object)
 
@@ -27,9 +27,10 @@ pba(x, alpha = NA)
   size.text = 18)
 }
 \arguments{
-\item{alpha}{A double. Defines a hyper-parameter used
-by the Box-Cox transformation to approximate log-ratio
-variance in the presence of zeros. Skip with NA.}
+\item{how}{A character string. The method used to construct the SBP.
+The default computes principal balances via \code{sbp.fromPBA}.}
+
+\item{...}{Arguments passed to \code{how} method.}
 
 \item{object, x}{A \code{pba} object.}
 

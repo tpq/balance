@@ -1,3 +1,9 @@
+## balance 0.2.0
+---------------------
+* Update `pba` methods
+    * New argument `how` supports any SBP routine
+    * Add new tests for `pba.predict` method
+
 ## balance 0.1.9
 ---------------------
 * Update `balance` methods

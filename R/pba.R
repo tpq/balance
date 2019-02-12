@@ -23,6 +23,9 @@
 #' @param group A character vector. Group labels used to color points.
 #' @param pb1,pb2 An integer. Sets principal balances to plot.
 #' @param size.text An integer. Sets legend text size.
+#' @param how A character string. The method used to construct the SBP.
+#'  The default computes principal balances via \code{sbp.fromPBA}.
+#' @param ... Arguments passed to \code{how} method.
 #'
 #' @return Returns a \code{pba} object.
 #'
@@ -54,13 +57,20 @@ setClass("pba",
 
 #' @rdname pba
 #' @export
-pba <- function(x, alpha = NA){
+pba <- function(x, how = "sbp.fromPBA", ...){
 
   object <- methods::new("pba")
   object@data <- as.matrix(x)
-  object@sbp <- sbp.fromPBA(x, alpha)
+
+  # Calculate SBP
+  args <- as.list(substitute(list(...)))[-1]
+  args <- append(args, list("x" = object@data))
+  object@sbp <- do.call(how, args)
+
+  # Calculate balances
   object@pba <- balance.fromSBP(x, object@sbp)
 
+  # Calculate var
   object@totvar <- apply(object@pba, 2, stats::var)
   object@subvar <- object@totvar/sum(object@totvar)
 
