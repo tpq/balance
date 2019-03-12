@@ -1,3 +1,9 @@
+## balance 0.2.1
+---------------------
+* Update `balance.plot` method
+    * Now plot boxplot OR points (not both)
+    * Fix length of range line
+
 ## balance 0.2.0
 ---------------------
 * Update `pba` methods

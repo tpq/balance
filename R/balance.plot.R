@@ -199,9 +199,7 @@ balance.plot <- function(x, y,
     ggplot2::theme(legend.position = "top")
 
   balance.distribution <-
-    ggplot2::ggplot(dt, ggplot2::aes_string(x = "BalanceID", y = "SampleValue", group = "Group"), col = "black") +
-    ggplot2::geom_boxplot(ggplot2::aes_string(col = "n.group"), position = ggplot2::position_dodge(0.8)) + # if missing, n.group set to "1"
-    ggplot2::geom_point(ggplot2::aes_string(col = "n.group"), size = size.pt, position = ggplot2::position_dodge(0.8)) + # if missing, n.group set to "1"
+    ggplot2::ggplot(dt, ggplot2::aes_string(x = "BalanceID", y = "SampleValue", group = "BalanceID"), col = "black") +
     ggplot2::scale_colour_manual(values = n.cols) + # if missing, set to "black"
     ggplot2::xlab("") + ggplot2::ylab("Sample-wise Distribution of Balance") +
     ggplot2::ylim(-1.1 * max(abs(dt$SampleValue)), 1.1 * max(abs(dt$SampleValue))) +
@@ -213,12 +211,26 @@ balance.plot <- function(x, y,
 
   if(weigh.var){
     balance.distribution <- balance.distribution +
-      ggplot2::geom_line(ggplot2::aes_string(size = "LineWidth")) + # keep unchanged to show range...
+      ggplot2::geom_line(ggplot2::aes_string(size = "LineWidth"), alpha = .5) + # keep unchanged to show range...
       ggplot2::guides(size = FALSE)
   }else{
     balance.distribution <- balance.distribution +
-      ggplot2::geom_line() +
+      ggplot2::geom_line(alpha = .5) +
       ggplot2::guides(size = FALSE)
+  }
+
+  if(boxplot.split){
+    balance.distribution <- balance.distribution +
+      ggplot2::geom_boxplot(ggplot2::aes_string(group = "Group", col = "n.group"),
+                            outlier.size = size.pt,
+                            position = ggplot2::position_dodge(0.8),
+                            alpha = .5) # if missing, n.group set to "1"
+  }else{
+    balance.distribution <- balance.distribution +
+      ggplot2::geom_point(ggplot2::aes_string(col = "n.group"),
+                          size = size.pt,
+                          position = ggplot2::position_dodge(0.8),
+                          alpha = .5) # if missing, n.group set to "1"
   }
 
   grid::grid.newpage()
