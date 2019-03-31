@@ -1,3 +1,9 @@
+## balance 0.2.2
+---------------------
+* Update `sbp` methods
+    * New `sbp.fromTotalWithin` returns a discriminative tree
+    * Revise some documentation
+
 ## balance 0.2.1
 ---------------------
 * Update `balance.plot` method

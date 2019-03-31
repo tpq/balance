@@ -151,14 +151,14 @@ sbp.fromPBA <- function(x, alpha = NA){
   sbp.fromHclust(h)
 }
 
-#' Build SBP Matrix of "Anti-Balances"
+#' Build SBP Matrix of "Anti-Principal Balances"
 #'
-#' This function builds an SBP of "anti-balances" by clustering
-#'  the difference of the log-ratio variance from the
-#'  maximum log-ratio variance. Unlike principal balances,
+#' This function builds an SBP of "anti-principal balances"
+#'  by clustering the difference of the log-ratio variance from
+#'  the maximum log-ratio variance. Unlike principal balances,
 #'  where the first balances explain the most variance,
-#'  this function selects "anti-balances" so that the
-#'  last balances explain the most variance.
+#'  this function selects "anti-principal balances" so that
+#'  the last balances explain relatively more variance.
 #'
 #' @inheritParams vlr
 #'
@@ -180,14 +180,13 @@ sbp.fromABA <- function(x, alpha = NA){
   sbp.fromHclust(h)
 }
 
-#' Build SBP Matrix of "Anti-Balances"
+#' Build SBP Matrix of "Discriminant Balances"
 #'
-#' This function builds an SBP of "anti-balances" by clustering
-#'  the difference of the log-ratio variance from the
-#'  maximum log-ratio variance. Unlike principal balances,
-#'  where the first balances explain the most variance,
-#'  this function selects "anti-balances" so that the
-#'  last balances explain the most variance.
+#' This function builds an SBP of "discriminant balances"
+#'  by clustering a matrix of the pair-wise total within-group
+#'  variance, adjusted by the pair-wise total variance.
+#'  The method is intended to make the smallest balances
+#'  most discriminative.
 #'
 #' @inheritParams vlr
 #' @param group A character vector. Group or sub-group membership.
@@ -214,6 +213,44 @@ sbp.fromPropd <- function(x, group, ...){
   pd <- propr::propd(x, group, ...)
   theta <- propr::getMatrix(pd)
   h <- stats::hclust(stats::as.dist(theta))
+  sbp.fromHclust(h)
+}
+
+#' Build SBP Matrix of "Discriminant Balances"
+#'
+#' This function builds an SBP of "discriminant balances"
+#'  by clustering a matrix of the pair-wise total within-group
+#'  variance, unadjusted by the pair-wise total variance.
+#'  The method is intended to make the smallest balances
+#'  most discriminative.
+#'
+#' @inheritParams vlr
+#' @param group A character vector. Group or sub-group membership.
+#'  Argument passed to \code{propr::propd}.
+#'
+#' @return An SBP matrix.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' \dontrun{
+#' library(balance)
+#' data(iris)
+#' x <- iris[,1:4]
+#' sbp.fromTotalWithin(x)
+#' }
+#'
+#' @export
+sbp.fromTotalWithin <- function(x, group){
+
+  packageCheck("propr")
+
+  pd <- propr::propd(x, group)
+  theta <- propr::getMatrix(pd)
+  vlr <- vlr(x)
+  N <- length(group)
+  wvar <- theta*vlr*N
+  h <- stats::hclust(stats::as.dist(wvar))
   sbp.fromHclust(h)
 }
 

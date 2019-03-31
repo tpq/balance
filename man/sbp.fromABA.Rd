@@ -2,7 +2,7 @@
 % Please edit documentation in R/sbp.R
 \name{sbp.fromABA}
 \alias{sbp.fromABA}
-\title{Build SBP Matrix of "Anti-Balances"}
+\title{Build SBP Matrix of "Anti-Principal Balances"}
 \usage{
 sbp.fromABA(x, alpha = NA)
 }
@@ -17,12 +17,12 @@ variance in the presence of zeros. Skip with NA.}
 An SBP matrix.
 }
 \description{
-This function builds an SBP of "anti-balances" by clustering
- the difference of the log-ratio variance from the
- maximum log-ratio variance. Unlike principal balances,
+This function builds an SBP of "anti-principal balances"
+ by clustering the difference of the log-ratio variance from
+ the maximum log-ratio variance. Unlike principal balances,
  where the first balances explain the most variance,
- this function selects "anti-balances" so that the
- last balances explain the most variance.
+ this function selects "anti-principal balances" so that
+ the last balances explain relatively more variance.
 }
 \examples{
 library(balance)
