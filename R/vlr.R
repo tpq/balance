@@ -60,16 +60,16 @@ vlr <- function(x, alpha = NA){
   out
 }
 
-#' Calculate Between-Group Log-ratio Variance
+#' Calculate Between-Group Log-ratio Sums of Squares
 #'
-#' This function calculates the log-ratio variance
+#' This function calculates the log-ratio sums of squares
 #'  for all components in a matrix.
 #'
 #' @inheritParams sbp.fromPDBA
 #' @return A VLR matrix.
 #' @author Thom Quinn
 #' @export
-vlrBetween <- function(x, group, ...){
+ssBetween <- function(x, group, ...){
 
   packageCheck("propr")
 
@@ -86,16 +86,16 @@ vlrBetween <- function(x, group, ...){
   return(A)
 }
 
-#' Calculate Within-Group Log-ratio Variance
+#' Calculate Within-Group Log-ratio Sums of Squares
 #'
-#' This function calculates the log-ratio variance
+#' This function calculates the log-ratio sums of squares
 #'  for all components in a matrix.
 #'
 #' @inheritParams sbp.fromPDBA
 #' @return A VLR matrix.
 #' @author Thom Quinn
 #' @export
-vlrWithin <- function(x, group, ...){
+ssWithin <- function(x, group, ...){
 
   packageCheck("propr")
 

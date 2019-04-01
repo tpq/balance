@@ -5,8 +5,8 @@
     * Replace `sbp.fromADBA` with `sbp.fromPropd` wrapper
     * Deprecate all `ldaRule` commands
 * Add `vlr` methods
-    * Add `vlrBetween` to calculate between-group log-ratio variance
-    * Add `vlrWithin` to calculate within-group log-ratio variance
+    * Add `ssBetween` to calculate between-group log-ratio sums of squares
+    * Add `ssWithin` to calculate within-group log-ratio sums of squares
 
 ## balance 0.2.2
 ---------------------
