@@ -1,7 +1,10 @@
 ## balance 0.2.2
 ---------------------
 * Update `sbp` methods
-    * New `sbp.fromTotalWithin` returns a discriminative tree
+    * New `ldaRule` calculates BETWEEN / WITHIN variance pair-wise
+    * New `sbp.fromPDBA` returns a rooted discriminative tree
+    * New `sbp.fromADBA` returns a distal discriminative tree
+    * Suppress messages for `propr::propd` calls
     * Revise some documentation
 
 ## balance 0.2.1

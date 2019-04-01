@@ -59,3 +59,43 @@ vlr <- function(x, alpha = NA){
   rownames(out) <- colnames(out)
   out
 }
+
+#' Compute Pair-wise LDA Rule
+#'
+#' This function computes a linear discriminant analysis rule,
+#'  S = (BETWEEN VARIANCE) / (WITHIN VARIANCE), for each feature pair.
+#'  The resultant matrix is clustered to make a discriminative tree.
+#'
+#' @inheritParams sbp.fromPropd
+#'
+#' @return A pair-wise LDA matrix.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' \dontrun{
+#' library(balance)
+#' data(iris)
+#' x <- iris[1:100,1:4]
+#' y <- iris[1:100,5]
+#' ldaRule(x, y)
+#' }
+#'
+#' @export
+ldaRule <- function(x, group){
+
+  packageCheck("propr")
+
+  pd <- suppressMessages(propr::propd(x, group))
+  df <- pd@results
+  grp1 <- df$p1 * df$lrv1 / (df$p * df$lrv)
+  grp2 <- df$p2 * df$lrv2 / (df$p * df$lrv)
+  btw <- df$p1 * df$p2 * (df$lrm2 - df$lrm1)^2 / (df$p^2 * df$lrv)
+  lda <- btw / (grp1 + grp2)
+  A <- matrix(0, ncol(x), ncol(x))
+  rownames(A) <- colnames(x)
+  colnames(A) <- colnames(x)
+  A[lower.tri(A)] <- lda
+  A[upper.tri(A)] <- lda
+  return(A)
+}
