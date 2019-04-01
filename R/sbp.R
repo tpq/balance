@@ -180,12 +180,13 @@ sbp.fromABA <- function(x, alpha = NA){
   sbp.fromHclust(h)
 }
 
-#' Build SBP Matrix of "Discriminant Balances"
+#' Build SBP Matrix of "Principal Discriminant Balances"
 #'
 #' This function builds an SBP of "discriminant balances"
 #'  by clustering a matrix of the pair-wise total within-group
-#'  variance, adjusted by the pair-wise total variance.
-#'  The method is intended to make the smallest balances
+#'  variance, adjusted by the pair-wise total variance
+#'  (inverted by subtracting this value from 1).
+#'  The method is intended to make the largest balances
 #'  most discriminative.
 #'
 #' @inheritParams vlr
@@ -203,11 +204,45 @@ sbp.fromABA <- function(x, alpha = NA){
 #' data(iris)
 #' x <- iris[1:100,1:4]
 #' y <- iris[1:100,5]
-#' sbp.fromPropd(x, y)
+#' sbp.fromPDBA(x, y)
 #' }
 #'
 #' @export
-sbp.fromPropd <- function(x, group, ...){
+sbp.fromPDBA <- function(x, group, ...){
+
+  packageCheck("propr")
+
+  pd <- suppressMessages(propr::propd(x, group, ...))
+  theta <- propr::getMatrix(pd)
+  h <- stats::hclust(stats::as.dist(1 - theta))
+  sbp.fromHclust(h)
+}
+
+#' Build SBP Matrix of "Anti-Principal Discriminant Balances"
+#'
+#' This function builds an SBP of "discriminant balances"
+#'  by clustering a matrix of the pair-wise total within-group
+#'  variance, adjusted by the pair-wise total variance.
+#'  The method is intended to make the smallest balances
+#'  most discriminative.
+#'
+#' @inheritParams sbp.fromPDBA
+#'
+#' @return An SBP matrix.
+#'
+#' @author Thom Quinn
+#'
+#' @examples
+#' \dontrun{
+#' library(balance)
+#' data(iris)
+#' x <- iris[1:100,1:4]
+#' y <- iris[1:100,5]
+#' sbp.fromADBA(x, y)
+#' }
+#'
+#' @export
+sbp.fromADBA <- function(x, group, ...){
 
   packageCheck("propr")
 
@@ -217,47 +252,12 @@ sbp.fromPropd <- function(x, group, ...){
   sbp.fromHclust(h)
 }
 
-#' Build SBP Matrix of "Principal Discriminant Balances"
-#'
-#' This function builds an SBP of "discriminant balances"
-#'  by clustering a matrix of the pair-wise between-group
-#'  variance over the pair-wise total within-group variance.
-#'  The method is intended to make the largest balances
-#'  most discriminative.
-#'
-#' @inheritParams sbp.fromPropd
-#'
-#' @return An SBP matrix.
-#'
-#' @author Thom Quinn
-#'
-#' @examples
-#' \dontrun{
-#' library(balance)
-#' data(iris)
-#' x <- iris[1:100,1:4]
-#' y <- iris[1:100,5]
-#' sbp.fromPropd(x, y)
-#' }
-#'
-#' @export
-sbp.fromPDBA <- function(x, group){
-
-  A <- ldaRule(x, group)
-  h <- stats::hclust(stats::as.dist(A))
-  sbp.fromHclust(h)
-}
-
 #' Build SBP Matrix of "Anti-Principal Discriminant Balances"
 #'
-#' This function builds an SBP of "discriminant balances"
-#'  by clustering a matrix of the pair-wise between-group
-#'  variance over the pair-wise total within-group variance
-#'  (inverted by subtracting it from its maximum value).
-#'  The method is intended to make the smallest balances
-#'  most discriminative.
+#' A wrapper for \code{\link{sbp.fromADBA}}.
+#'  See also \code{\link{sbp.fromPDBA}}.
 #'
-#' @inheritParams sbp.fromPropd
+#' @inheritParams sbp.fromPDBA
 #'
 #' @return An SBP matrix.
 #'
@@ -273,11 +273,9 @@ sbp.fromPDBA <- function(x, group){
 #' }
 #'
 #' @export
-sbp.fromADBA <- function(x, group){
+sbp.fromPropd <- function(x, group, ...){
 
-  A <- ldaRule(x, group)
-  h <- stats::hclust(stats::as.dist(max(A) - A))
-  sbp.fromHclust(h)
+  sbp.fromADBA(x, group, ...)
 }
 
 #' Sort SBP Matrix

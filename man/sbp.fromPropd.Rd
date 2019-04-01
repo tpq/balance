@@ -2,7 +2,7 @@
 % Please edit documentation in R/sbp.R
 \name{sbp.fromPropd}
 \alias{sbp.fromPropd}
-\title{Build SBP Matrix of "Discriminant Balances"}
+\title{Build SBP Matrix of "Anti-Principal Discriminant Balances"}
 \usage{
 sbp.fromPropd(x, group, ...)
 }
@@ -18,11 +18,8 @@ Argument passed to \code{propr::propd}.}
 An SBP matrix.
 }
 \description{
-This function builds an SBP of "discriminant balances"
- by clustering a matrix of the pair-wise total within-group
- variance, adjusted by the pair-wise total variance.
- The method is intended to make the smallest balances
- most discriminative.
+A wrapper for \code{\link{sbp.fromADBA}}.
+ See also \code{\link{sbp.fromPDBA}}.
 }
 \examples{
 \dontrun{

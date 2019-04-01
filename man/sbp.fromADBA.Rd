@@ -4,22 +4,23 @@
 \alias{sbp.fromADBA}
 \title{Build SBP Matrix of "Anti-Principal Discriminant Balances"}
 \usage{
-sbp.fromADBA(x, group)
+sbp.fromADBA(x, group, ...)
 }
 \arguments{
 \item{x}{A matrix with rows as samples (N) and columns as components (D).}
 
 \item{group}{A character vector. Group or sub-group membership.
 Argument passed to \code{propr::propd}.}
+
+\item{...}{Other arguments passed to \code{propr::propd}.}
 }
 \value{
 An SBP matrix.
 }
 \description{
 This function builds an SBP of "discriminant balances"
- by clustering a matrix of the pair-wise between-group
- variance over the pair-wise total within-group variance
- (inverted by subtracting it from its maximum value).
+ by clustering a matrix of the pair-wise total within-group
+ variance, adjusted by the pair-wise total variance.
  The method is intended to make the smallest balances
  most discriminative.
 }
@@ -29,7 +30,7 @@ library(balance)
 data(iris)
 x <- iris[1:100,1:4]
 y <- iris[1:100,5]
-sbp.fromPropd(x, y)
+sbp.fromADBA(x, y)
 }
 
 }

@@ -1,3 +1,13 @@
+## balance 0.2.3
+---------------------
+* Update `sbp` methods
+    * Replace `sbp.fromPDBA` with tree that clusters (1 - theta)
+    * Replace `sbp.fromADBA` with `sbp.fromPropd` wrapper
+    * Deprecate all `ldaRule` commands
+* Add `vlr` methods
+    * Add `vlrBetween` to calculate between-group log-ratio variance
+    * Add `vlrWithin` to calculate within-group log-ratio variance
+
 ## balance 0.2.2
 ---------------------
 * Update `sbp` methods
