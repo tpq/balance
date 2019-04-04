@@ -1,3 +1,9 @@
+## balance 0.2.4
+---------------------
+* Update `vlr` methods
+    * Add `pairwise` argument to `ssBetween` and `ssWithin`
+    * Add new tests for `ss` method
+
 ## balance 0.2.3
 ---------------------
 * Update `sbp` methods

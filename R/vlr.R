@@ -62,52 +62,92 @@ vlr <- function(x, alpha = NA){
 
 #' Calculate Between-Group Log-ratio Sums of Squares
 #'
-#' This function calculates the log-ratio sums of squares
-#'  for all components in a matrix.
+#' This function calculates the between-group sums of squares
+#'  for all variables or all log-ratios. This function
+#'  only supports binary outcomes.
 #'
 #' @inheritParams sbp.fromPDBA
-#' @return A VLR matrix.
+#' @param pairwise A logical. Toggles whether to decompose
+#'  sums of squares for each log-ratio.
+#' @return If \code{pairwise = FALSE}, this function returns
+#'  a vector of the sums of squares for each variable.
+#'  If \code{pairwise = TRUE}, this function returns a matrix
+#'  of the sums of squares for each log-ratio.
 #' @author Thom Quinn
 #' @export
-ssBetween <- function(x, group, ...){
+ssBetween <- function(x, group, pairwise = FALSE, ...){
 
-  packageCheck("propr")
+  if(pairwise){
 
-  pd <- suppressMessages(propr::propd(x, group, ...))
-  df <- pd@results
-  grp1 <- df$p1 * df$lrv1
-  grp2 <- df$p2 * df$lrv2
-  mat <- df$p * df$lrv - (grp1 + grp2)
-  A <- matrix(0, ncol(x), ncol(x))
-  rownames(A) <- colnames(x)
-  colnames(A) <- colnames(x)
-  A[lower.tri(A)] <- mat
-  A[upper.tri(A)] <- mat
-  return(A)
+    packageCheck("propr")
+
+    pd <- suppressMessages(propr::propd(x, group, ...))
+    df <- pd@results
+    grp1 <- df$p1 * df$lrv1
+    grp2 <- df$p2 * df$lrv2
+    mat <- df$p * df$lrv - (grp1 + grp2)
+    A <- matrix(0, ncol(x), ncol(x))
+    rownames(A) <- colnames(x)
+    colnames(A) <- colnames(x)
+    A[lower.tri(A)] <- mat
+    A[upper.tri(A)] <- mat
+    return(A)
+
+  }else{
+
+    within <- ssWithin(x, group, pairwise = FALSE)
+    total <- apply(x, 2, stats::var) * (nrow(x)-1)
+    between <- total - within
+    return(between)
+  }
 }
 
 #' Calculate Within-Group Log-ratio Sums of Squares
 #'
-#' This function calculates the log-ratio sums of squares
-#'  for all components in a matrix.
+#' This function calculates the within-group sums of squares
+#'  for all variables or all log-ratios. This function
+#'  only supports binary outcomes.
 #'
 #' @inheritParams sbp.fromPDBA
-#' @return A VLR matrix.
+#' @param pairwise A logical. Toggles whether to decompose
+#'  sums of squares for each log-ratio.
+#' @return If \code{pairwise = FALSE}, this function returns
+#'  a vector of the sums of squares for each variable.
+#'  If \code{pairwise = TRUE}, this function returns a matrix
+#'  of the sums of squares for each log-ratio.
 #' @author Thom Quinn
 #' @export
-ssWithin <- function(x, group, ...){
+ssWithin <- function(x, group, pairwise = FALSE, ...){
 
-  packageCheck("propr")
+  if(pairwise){
 
-  pd <- suppressMessages(propr::propd(x, group, ...))
-  df <- pd@results
-  grp1 <- df$p1 * df$lrv1
-  grp2 <- df$p2 * df$lrv2
-  mat <- grp1 + grp2
-  A <- matrix(0, ncol(x), ncol(x))
-  rownames(A) <- colnames(x)
-  colnames(A) <- colnames(x)
-  A[lower.tri(A)] <- mat
-  A[upper.tri(A)] <- mat
-  return(A)
+    packageCheck("propr")
+
+    pd <- suppressMessages(propr::propd(x, group, ...))
+    df <- pd@results
+    grp1 <- df$p1 * df$lrv1
+    grp2 <- df$p2 * df$lrv2
+    mat <- grp1 + grp2
+    A <- matrix(0, ncol(x), ncol(x))
+    rownames(A) <- colnames(x)
+    colnames(A) <- colnames(x)
+    A[lower.tri(A)] <- mat
+    A[upper.tri(A)] <- mat
+    return(A)
+
+  }else{
+
+    if(length(unique(group)) != 2){
+      stop("Please provide a binary outcome.")
+    }
+
+    grp1 <- group == unique(group)[1]
+    grp2 <- group == unique(group)[2]
+    within <- apply(x, 2, function(z){
+      (sum(grp1)-1) * stats::var(z[grp1]) +
+        (sum(grp2)-1) * stats::var(z[grp2])
+    })
+
+    return(within)
+  }
 }

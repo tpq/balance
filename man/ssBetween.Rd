@@ -4,7 +4,7 @@
 \alias{ssBetween}
 \title{Calculate Between-Group Log-ratio Sums of Squares}
 \usage{
-ssBetween(x, group, ...)
+ssBetween(x, group, pairwise = FALSE, ...)
 }
 \arguments{
 \item{x}{A matrix with rows as samples (N) and columns as components (D).}
@@ -12,14 +12,21 @@ ssBetween(x, group, ...)
 \item{group}{A character vector. Group or sub-group membership.
 Argument passed to \code{propr::propd}.}
 
+\item{pairwise}{A logical. Toggles whether to decompose
+sums of squares for each log-ratio.}
+
 \item{...}{Other arguments passed to \code{propr::propd}.}
 }
 \value{
-A VLR matrix.
+If \code{pairwise = FALSE}, this function returns
+ a vector of the sums of squares for each variable.
+ If \code{pairwise = TRUE}, this function returns a matrix
+ of the sums of squares for each log-ratio.
 }
 \description{
-This function calculates the log-ratio sums of squares
- for all components in a matrix.
+This function calculates the between-group sums of squares
+ for all variables or all log-ratios. This function
+ only supports binary outcomes.
 }
 \author{
 Thom Quinn
