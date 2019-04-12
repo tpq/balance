@@ -7,7 +7,7 @@
 packageCheck <- function(package){
 
   if(!requireNamespace(package, quietly = TRUE)){
-    stop("Uh oh! This propr method depends on ", package, "! ",
+    stop("Uh oh! This balance method depends on ", package, "! ",
          "Try running: install.packages('", package, "')")
   }
 }
