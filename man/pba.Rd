@@ -17,14 +17,11 @@ pba(x, how = "sbp.fromPBA", ...)
 
 \S4method{predict}{pba}(object, y)
 
-\S4method{plot}{pba,missing}(x, y, group, pb1 = 1, pb2 = 2,
-  size.text = 18)
+\S4method{plot}{pba,missing}(x, y, group, pb1 = 1, pb2 = 2, size.text = 18)
 
-\S4method{plot}{pba,matrix}(x, y, group, pb1 = 1, pb2 = 2,
-  size.text = 18)
+\S4method{plot}{pba,matrix}(x, y, group, pb1 = 1, pb2 = 2, size.text = 18)
 
-\S4method{plot}{pba,data.frame}(x, y, group, pb1 = 1, pb2 = 2,
-  size.text = 18)
+\S4method{plot}{pba,data.frame}(x, y, group, pb1 = 1, pb2 = 2, size.text = 18)
 }
 \arguments{
 \item{how}{A character string. The method used to construct the SBP.

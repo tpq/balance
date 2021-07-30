@@ -17,7 +17,6 @@
 #' @slot totvar A numeric vector. The total variance per balance.
 #' @slot subvar A numeric vector. The fractional variance per balance.
 #'
-#' @inheritParams vlr
 #' @param object,x A \code{pba} object.
 #' @param y A matrix on which to deploy the \code{pba} model.
 #' @param group A character vector. Group labels used to color points.

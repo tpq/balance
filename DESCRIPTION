@@ -1,6 +1,6 @@
 Package: balance
 Title: Visualize Balances of Compositional Data
-Version: 0.2.4
+Version: 0.2.5
 URL: http://github.com/tpq/balance
 BugReports: http://github.com/tpq/balance/issues
 Authors@R: c(
@@ -15,7 +15,7 @@ Description: Balances have become a cornerstone of compositional data analysis. 
 License: GPL-2
 LazyData: TRUE
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2
 Encoding: UTF-8
 Imports:
     methods,
@@ -25,12 +25,9 @@ Depends:
     R (>= 3.2.2)
 Suggests:
     ape,
-    ggthemes,
     knitr,
-    philr,
     propr,
     reshape2,
     rmarkdown,
-    robCompositions,
     testthat,
     vegan

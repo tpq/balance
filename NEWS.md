@@ -1,3 +1,9 @@
+## balance 0.2.5
+---------------------
+* Remove dependencies
+    * Migrate data from `robCompositions` to remove dependency
+    * Remove `ggthemes` dependency
+
 ## balance 0.2.4
 ---------------------
 * Update `vlr` methods
