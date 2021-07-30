@@ -35,10 +35,10 @@ library(balance)
 
 ## Generating balance figures
 
-We will demonstrate this package using an example from the `robCompositions` package. The "expenditures" matrix contains 20 compositions (row), each measuring 5 components (columns). As compositional data, the abundances are irrelevant and each composition sums to unity. The "y1" matrix is a serial binary partition (SBP) matrix that describes how to partition the 5 components into 4 balances.
+We will demonstrate this package using example data taken from the `robCompositions` package. The "expenditures" matrix contains 20 compositions (row), each measuring 5 components (columns). As compositional data, the abundances are irrelevant and each composition sums to unity. The "y1" matrix is a serial binary partition (SBP) matrix that describes how to partition the 5 components into 4 balances.
 
 ```{r example}
-data(expenditures, package = "robCompositions")
+data(expenditures)
 y1 <- data.frame(c(1, 1, 1, -1, -1), c(1, -1, -1, 0, 0),
                  c(0, +1, -1, 0, 0), c(0, 0, 0, +1, -1))
 colnames(y1) <- paste0("z", 1:4)
@@ -78,8 +78,7 @@ res <- balance.plot(expenditures, y1,
 The `balance.plot` function returns a list containing the "partition" `ggplot` object, the "distribution" `ggplot` object, and the per-sample balances.
 
 ```{r, fig.width = 7, fig.height = 5}
-library(ggthemes)
-custom1 <- res[[1]] + theme_excel() + scale_colour_excel()
-custom2 <- res[[2]] + theme_excel() + scale_colour_excel()
+custom1 <- res[[1]]
+custom2 <- res[[2]]
 balance.combine(custom1, custom2)
 ```

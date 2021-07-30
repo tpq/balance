@@ -1,6 +1,6 @@
 library(balance)
 
-data(expenditures, package = "robCompositions")
+data(expenditures)
 y1 <- data.frame(c(1,1,1,-1,-1),c(1,-1,-1,0,0),
                  c(0,+1,-1,0,0),c(0,0,0,+1,-1))
 colnames(y1) <- paste0("z", 1:4)
