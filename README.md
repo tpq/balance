@@ -53,7 +53,7 @@ citation("balance")
 #> 
 #>   Quinn T. 2018. Visualizing balances of compositional data: A new
 #>   alternative to balance dendrograms. F1000Research, 7:1278. URL
-#>   http://f1000research.com/articles/7-1278/.
+#>   https://f1000research.com/articles/7-1278.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -64,6 +64,6 @@ citation("balance")
 #>     year = {2018},
 #>     volume = {7},
 #>     number = {1278},
-#>     url = {http://f1000research.com/articles/7-1278/},
+#>     url = {https://f1000research.com/articles/7-1278},
 #>   }
 ```

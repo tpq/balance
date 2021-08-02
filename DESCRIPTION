@@ -1,8 +1,8 @@
 Package: balance
 Title: Visualize Balances of Compositional Data
 Version: 0.2.5
-URL: http://github.com/tpq/balance
-BugReports: http://github.com/tpq/balance/issues
+URL: https://github.com/tpq/balance
+BugReports: https://github.com/tpq/balance/issues
 Authors@R: c(
     person("Thomas", "Quinn", email = "contacttomquinn@gmail.com", role = c("aut", "cre"))
     )
